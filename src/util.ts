@@ -8,3 +8,13 @@ export function pickKeys<T extends object, X extends Array<keyof T>>(
   }
   return x;
 }
+
+export async function hash(algorithm: string, input: string): Promise<string> {
+  const hashBuf = await crypto.subtle.digest(
+    algorithm,
+    new TextEncoder().encode(input),
+  );
+  return Array.from(new Uint8Array(hashBuf))
+    .map((b) => b.toString(16).padStart(2, '0'))
+    .join('');
+}

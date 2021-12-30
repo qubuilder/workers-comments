@@ -1,6 +1,6 @@
 import { Router, Sunder } from 'sunder';
 import { renderErrorsAsJSON } from 'sunder/middleware/render';
-import { pickKeys } from './util';
+import { hash, pickKeys } from './util';
 import { Comment, GetResponse, StoredComment } from './types';
 
 const app = new Sunder();
@@ -8,10 +8,10 @@ const router = new Router();
 
 router.get('/comments/:article', async ({ params, response }) => {
   const content: GetResponse = { comments: [] };
-  const article = params.article;
+  const article = await hash('SHA-512', params.article);
 
   const values = await COMMENTS_KV.list({
-    prefix: article + '-',
+    prefix: article,
   });
   for (const key of values.keys) {
     console.log('Found comment: ' + key.name);
@@ -34,16 +34,10 @@ router.get('/comments/:article', async ({ params, response }) => {
 router.post('/comments/:article', async ({ request, response, params }) => {
   const time = Date.now();
   const body: Comment = await request.json();
-  const key = `${params.article.replace('/', '')}-${Date.now()}`;
-  const digest = await crypto.subtle.digest(
-    'MD5',
-    new TextEncoder().encode(body.email),
-  );
+  const key = `${await hash('SHA-512', params.article)}-${Date.now()}`;
   const profile =
-    'https://www.gravatar.com/avatar/' +
-    Array.from(new Uint8Array(digest))
-      .map((b) => b.toString(16).padStart(2, '0'))
-      .join('');
+    'https://www.gravatar.com/avatar/' + (await hash('MD5', body.email));
+
   const comment: StoredComment = {
     ...body,
     user_ip: request.headers.get('cf-connecting-ip') ?? '',

@@ -6,7 +6,7 @@ I know that it's not the best optimized for now, but I will take care of it.
 
 ## Todo
 
-- [ ] Authentication via Auth0
+- [ ] Authentication via JWT
 - [ ] Validation
 - [ ] Moderation
 - [ ] Configuration
@@ -14,5 +14,6 @@ I know that it's not the best optimized for now, but I will take care of it.
 - [ ] OpenAPI File for Easy Integration
 - [x] Gravatar Profile Pic
 - [ ] Pagination
-- [ ] UniqueIDs for prefix (ex: so that article "hello" won't retrieve data from "hello world")
+- [x] UniqueIDs for prefix (ex: so that article "hello" won't retrieve data from "hello world"
+- [ ] Testing
 
