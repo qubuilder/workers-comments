@@ -1,0 +1,22 @@
+export type Comment = {
+  name: string;
+  email: string;
+  content: string;
+};
+
+export type ResponseComment = {
+  profile: string;
+  time: number;
+} & Omit<Comment, 'email'>;
+
+export type StoredComment = {
+  user_ip: string;
+  user_agent: string;
+  referrer: string;
+  profile: string;
+  time: number;
+} & Comment;
+
+export type GetResponse = {
+  comments: Array<ResponseComment>;
+};

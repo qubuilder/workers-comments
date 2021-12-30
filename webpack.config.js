@@ -1,4 +1,4 @@
-const path = require('path')
+const path = require('path');
 
 module.exports = {
   entry: './src/index.ts',
@@ -7,9 +7,9 @@ module.exports = {
     path: path.join(__dirname, 'dist'),
   },
   devtool: 'cheap-module-source-map',
-  mode: 'development',
+  mode: 'production',
   resolve: {
-    extensions: ['.ts', '.tsx', '.js'],
+    extensions: ['.js', '.ts', '.mjs'],
   },
   module: {
     rules: [
@@ -21,6 +21,12 @@ module.exports = {
           // transpileOnly: true,
         },
       },
+      {
+        test: /\.m?js/,
+        resolve: {
+          fullySpecified: false
+        }
+      }
     ],
   },
-}
+};
