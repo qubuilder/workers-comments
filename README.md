@@ -13,7 +13,7 @@ I know that it's not the best optimized for now, but I will take care of it.
 - [ ] Cache API
 - [ ] OpenAPI File for Easy Integration
 - [x] Gravatar Profile Pic
-- [ ] Pagination
+- [x] Pagination
 - [x] UniqueIDs for prefix (ex: so that article "hello" won't retrieve data from "hello world"
 - [ ] Testing
 

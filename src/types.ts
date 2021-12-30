@@ -5,6 +5,7 @@ export type Comment = {
 };
 
 export type ResponseComment = {
+  id: string;
   profile: string;
   time: number;
 } & Omit<Comment, 'email'>;
@@ -19,4 +20,5 @@ export type StoredComment = {
 
 export type GetResponse = {
   comments: Array<ResponseComment>;
+  cursor: string | null;
 };

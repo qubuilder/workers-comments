@@ -6,12 +6,19 @@ import { Comment, GetResponse, StoredComment } from './types';
 const app = new Sunder();
 const router = new Router();
 
-router.get('/comments/:article', async ({ params, response }) => {
-  const content: GetResponse = { comments: [] };
+router.get('/comments/:article', async ({ request, params, response }) => {
+  const content: GetResponse = { comments: [], cursor: null };
   const article = await hash('SHA-512', params.article);
-
+  const urlParams = new URLSearchParams(
+    request.url.substring(request.url.indexOf('?')),
+  );
+  console.log('url', request.url);
+  console.log('limit', urlParams.get('limit'));
+  console.log('cursor', urlParams.get('cursor'));
   const values = await COMMENTS_KV.list({
     prefix: article,
+    limit: parseInt(urlParams.get('limit') ?? '1000'),
+    cursor: urlParams.get('cursor'),
   });
   for (const key of values.keys) {
     console.log('Found comment: ' + key.name);
@@ -23,7 +30,10 @@ router.get('/comments/:article', async ({ params, response }) => {
       'content',
       'time',
     ]);
-    content.comments.push(comment);
+    content.comments.push({ ...comment, id: key.name });
+    if (values.cursor != null) {
+      content.cursor = values.cursor;
+    }
   }
 
   response.status = 200;
