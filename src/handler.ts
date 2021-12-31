@@ -2,6 +2,7 @@ import { Router, Sunder } from 'sunder';
 import { renderErrorsAsJSON } from 'sunder/middleware/render';
 import { hash, pickKeys } from './util';
 import { Comment, GetResponse, StoredComment } from './types';
+import { config } from './config';
 
 const app = new Sunder();
 const router = new Router();
@@ -38,7 +39,14 @@ router.post('/comments/:article', async ({ request, response, params }) => {
   const time = Date.now();
   const body: Comment = await request.json();
   const now = Date.now().toString();
-  const timestamp = '0'.repeat(128 - now.length) + now;
+  let timestamp: string;
+  if (config.reverseOrder) {
+    const max = BigInt('9'.repeat(128));
+    const nowBig = BigInt(now);
+    timestamp = (max - nowBig).toString();
+  } else {
+    timestamp = '0'.repeat(128 - now.length) + now;
+  }
   const key = `${await hash('SHA-512', params.article)}-${timestamp}`;
   const profile = 'https://www.gravatar.com/avatar/' + (await hash('MD5', body.email));
 

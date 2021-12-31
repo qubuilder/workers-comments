@@ -15,7 +15,7 @@ I know that it's not the best optimized for now, but I will take care of it.
 - [x] Gravatar Profile Pic
 - [x] Pagination
 - [x] UniqueIDs for prefix (ex: so that article "hello" won't retrieve data from "hello world"
-- [ ] Ordering
+- [x] Ordering
 - [ ] Testing
 - [ ] Likes?
 - [ ] Replies?
