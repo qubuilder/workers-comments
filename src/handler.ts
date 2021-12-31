@@ -9,9 +9,7 @@ const router = new Router();
 router.get('/comments/:article', async ({ request, params, response }) => {
   const content: GetResponse = { comments: [], cursor: null };
   const article = await hash('SHA-512', params.article);
-  const urlParams = new URLSearchParams(
-    request.url.substring(request.url.indexOf('?')),
-  );
+  const urlParams = new URLSearchParams(request.url.substring(request.url.indexOf('?')));
   console.log('url', request.url);
   console.log('limit', urlParams.get('limit'));
   console.log('cursor', urlParams.get('cursor'));
@@ -24,12 +22,7 @@ router.get('/comments/:article', async ({ request, params, response }) => {
     console.log('Found comment: ' + key.name);
     const jsonComment = (await COMMENTS_KV.get(key.name)) as string;
     const storedComment = JSON.parse(jsonComment) as StoredComment;
-    const comment = pickKeys(storedComment, [
-      'name',
-      'profile',
-      'content',
-      'time',
-    ]);
+    const comment = pickKeys(storedComment, ['name', 'profile', 'content', 'time']);
     content.comments.push({ ...comment, id: key.name });
     if (values.cursor != null) {
       content.cursor = values.cursor;
@@ -44,9 +37,10 @@ router.get('/comments/:article', async ({ request, params, response }) => {
 router.post('/comments/:article', async ({ request, response, params }) => {
   const time = Date.now();
   const body: Comment = await request.json();
-  const key = `${await hash('SHA-512', params.article)}-${Date.now()}`;
-  const profile =
-    'https://www.gravatar.com/avatar/' + (await hash('MD5', body.email));
+  const now = Date.now().toString();
+  const timestamp = '0'.repeat(128 - now.length) + now;
+  const key = `${await hash('SHA-512', params.article)}-${timestamp}`;
+  const profile = 'https://www.gravatar.com/avatar/' + (await hash('MD5', body.email));
 
   const comment: StoredComment = {
     ...body,
