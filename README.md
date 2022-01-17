@@ -7,7 +7,7 @@ I know that it's not the best optimized for now, but I will take care of it.
 ## Todo
 
 - [ ] Authentication via JWT
-- [ ] Validation
+- [x] Validation
 - [ ] Moderation
 - [ ] Configuration
 - [ ] Cache API

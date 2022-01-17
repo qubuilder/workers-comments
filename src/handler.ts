@@ -3,6 +3,8 @@ import { renderErrorsAsJSON } from 'sunder/middleware/render';
 import { hash, pickKeys } from './util';
 import { Comment, GetResponse, StoredComment } from './types';
 import { config } from './config';
+import { commentValidator } from './validators';
+import { BadRequest } from 'http-errors';
 
 const app = new Sunder();
 const router = new Router();
@@ -38,6 +40,12 @@ router.get('/comments/:article', async ({ request, params, response }) => {
 router.post('/comments/:article', async ({ request, response, params }) => {
   const time = Date.now();
   const body: Comment = await request.json();
+  const valResult = commentValidator.validate(body);
+  if (!valResult.valid)
+    throw new BadRequest(
+      'Invalid body. Errors:' +
+        valResult.errors.reduce((prevValue, currentValue) => prevValue + ', ' + currentValue.error, '')
+    );
   const now = Date.now().toString();
   let timestamp: string;
   if (config.reverseOrder) {

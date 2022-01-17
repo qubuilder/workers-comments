@@ -23,6 +23,7 @@
   },
   "devDependencies": {
     "@cloudflare/workers-types": "^3.3.0",
+    "@types/http-errors": "^1.8.2",
     "@types/jest": "^26.0.23",
     "@types/service-worker-mock": "^2.0.1",
     "@typescript-eslint/eslint-plugin": "^5.8.1",
@@ -47,6 +48,7 @@
   },
   "dependencies": {
     "@cfworker/json-schema": "^1.12.0",
-    "sunder": "^0.9.5"
+    "http-errors": "^2.0.0",
+    "sunder": "^0.10.1"
   }
 }
