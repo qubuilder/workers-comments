@@ -12,11 +12,14 @@
                 {
                     "name": "Get Comments",
                     "id": "724d7b4b-90e5-4beb-9ecf-930eb7b630ae",
+                    "protocolProfileBehavior": {
+                        "disableBodyPruning": true
+                    },
                     "request": {
                         "method": "GET",
                         "header": [],
                         "url": {
-                            "raw": "{{baseUrl}}/comments/:article?limit=<number>&cursor=<string>",
+                            "raw": "{{baseUrl}}/comments/:article?limit=5",
                             "host": [
                                 "{{baseUrl}}"
                             ],
@@ -27,20 +30,20 @@
                             "query": [
                                 {
                                     "key": "limit",
-                                    "value": "<number>",
+                                    "value": "5",
                                     "description": "Amount of comments to send at once"
                                 },
                                 {
                                     "key": "cursor",
-                                    "value": "<string>",
-                                    "description": "Cursor from previous requests, used to deliver next batch"
+                                    "value": "",
+                                    "description": "Cursor from previous requests, used to deliver next batch",
+                                    "disabled": true
                                 }
                             ],
                             "variable": [
                                 {
-                                    "id": "0db1aef4-7abe-47a5-9471-12d6ee712c9d",
                                     "key": "article",
-                                    "value": "<string>",
+                                    "value": "foo",
                                     "description": "(Required) The name of the article"
                                 }
                             ]
@@ -48,13 +51,13 @@
                     },
                     "response": [
                         {
-                            "id": "3ada3fc7-1058-462d-b4ec-c68713354be1",
+                            "id": "cf1fa810-94a5-4e73-8ff9-bcda73d7af59",
                             "name": "OK",
                             "originalRequest": {
                                 "method": "GET",
                                 "header": [],
                                 "url": {
-                                    "raw": "{{baseUrl}}/comments/:article?limit=<number>&cursor=<string>",
+                                    "raw": "{{baseUrl}}/comments/:article?limit=5",
                                     "host": [
                                         "{{baseUrl}}"
                                     ],
@@ -65,17 +68,20 @@
                                     "query": [
                                         {
                                             "key": "limit",
-                                            "value": "<number>"
+                                            "value": "5",
+                                            "description": "Amount of comments to send at once"
                                         },
                                         {
                                             "key": "cursor",
-                                            "value": "<string>"
+                                            "value": "",
+                                            "description": "Cursor from previous requests, used to deliver next batch",
+                                            "disabled": true
                                         }
                                     ],
                                     "variable": [
                                         {
                                             "key": "article",
-                                            "value": "<string>",
+                                            "value": "foo",
                                             "description": "(Required) The name of the article"
                                         }
                                     ]
@@ -86,19 +92,70 @@
                             "_postman_previewlanguage": "json",
                             "header": [
                                 {
+                                    "key": "Date",
+                                    "value": "Fri, 21 Jan 2022 23:42:06 GMT"
+                                },
+                                {
                                     "key": "Content-Type",
-                                    "value": "application/json"
+                                    "value": "application/json;charset=UTF-8"
+                                },
+                                {
+                                    "key": "Transfer-Encoding",
+                                    "value": "chunked"
+                                },
+                                {
+                                    "key": "Connection",
+                                    "value": "keep-alive"
+                                },
+                                {
+                                    "key": "Cache-Control",
+                                    "value": "public, max-age=300"
+                                },
+                                {
+                                    "key": "Expect-CT",
+                                    "value": "max-age=604800, report-uri=\"https://report-uri.cloudflare.com/cdn-cgi/beacon/expect-ct\""
+                                },
+                                {
+                                    "key": "Report-To",
+                                    "value": "{\"endpoints\":[{\"url\":\"https:\\/\\/a.nel.cloudflare.com\\/report\\/v3?s=HzLLufYHENYOK9L53e504WN7I%2B3znVGbV21%2BY1bTxWwZWi7EPq9Uyw84pyk27SuoxlXS2AefU99V4lBYFhpJNoI8O7jDNNDVm7XAwZV%2FWL5LL042yk0SaXhd96QNx7S2GbwS%2BmxdgnyJavaVzHTg57SXsxKageccNA%3D%3D\"}],\"group\":\"cf-nel\",\"max_age\":604800}"
+                                },
+                                {
+                                    "key": "NEL",
+                                    "value": "{\"success_fraction\":0,\"report_to\":\"cf-nel\",\"max_age\":604800}"
+                                },
+                                {
+                                    "key": "Vary",
+                                    "value": "Accept-Encoding"
+                                },
+                                {
+                                    "key": "Server",
+                                    "value": "cloudflare"
+                                },
+                                {
+                                    "key": "CF-RAY",
+                                    "value": "6d1465a7fcd64321-FRA"
+                                },
+                                {
+                                    "key": "Content-Encoding",
+                                    "value": "br"
+                                },
+                                {
+                                    "key": "alt-svc",
+                                    "value": "h3=\":443\"; ma=86400, h3-29=\":443\"; ma=86400"
                                 }
                             ],
                             "cookie": [],
                             "responseTime": null,
-                            "body": "{\n \"comments\": [\n  {\n   \"id\": \"<string>\",\n   \"name\": \"<string>\",\n   \"content\": \"<string>\",\n   \"profile\": \"<string>\",\n   \"time\": \"<dateTime>\"\n  },\n  {\n   \"id\": \"<string>\",\n   \"name\": \"<string>\",\n   \"content\": \"<string>\",\n   \"profile\": \"<string>\",\n   \"time\": \"<dateTime>\"\n  }\n ],\n \"cursor\": \"<string,null>\"\n}"
+                            "body": "{\n    \"comments\": [\n        {\n            \"name\": \"Gheo\",\n            \"profile\": \"https://www.gravatar.com/avatar/1f2a06b70de72a6f95de26d8501b555b\",\n            \"content\": \"bar7\",\n            \"time\": \"2022-01-21T23:41:13.664Z\",\n            \"id\": \"f7fbba6e0636f890e56fbbf3283e524c6fa3204ae298382d624741d0dc6638326e282c41be5e4254d8820772c5518a2c5a8c0c7f7eda19594a7eb539453e1ed7-99999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999998357191526335\"\n        },\n        {\n            \"name\": \"Gheo\",\n            \"profile\": \"https://www.gravatar.com/avatar/1f2a06b70de72a6f95de26d8501b555b\",\n            \"content\": \"bar6\",\n            \"time\": \"2022-01-21T23:41:10.653Z\",\n            \"id\": \"f7fbba6e0636f890e56fbbf3283e524c6fa3204ae298382d624741d0dc6638326e282c41be5e4254d8820772c5518a2c5a8c0c7f7eda19594a7eb539453e1ed7-99999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999998357191529346\"\n        },\n        {\n            \"name\": \"Gheo\",\n            \"profile\": \"https://www.gravatar.com/avatar/1f2a06b70de72a6f95de26d8501b555b\",\n            \"content\": \"bar5\",\n            \"time\": \"2022-01-21T23:41:07.679Z\",\n            \"id\": \"f7fbba6e0636f890e56fbbf3283e524c6fa3204ae298382d624741d0dc6638326e282c41be5e4254d8820772c5518a2c5a8c0c7f7eda19594a7eb539453e1ed7-99999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999998357191532320\"\n        },\n        {\n            \"name\": \"Gheo\",\n            \"profile\": \"https://www.gravatar.com/avatar/1f2a06b70de72a6f95de26d8501b555b\",\n            \"content\": \"bar4\",\n            \"time\": \"2022-01-21T23:41:04.637Z\",\n            \"id\": \"f7fbba6e0636f890e56fbbf3283e524c6fa3204ae298382d624741d0dc6638326e282c41be5e4254d8820772c5518a2c5a8c0c7f7eda19594a7eb539453e1ed7-99999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999998357191535362\"\n        },\n        {\n            \"name\": \"Gheo\",\n            \"profile\": \"https://www.gravatar.com/avatar/1f2a06b70de72a6f95de26d8501b555b\",\n            \"content\": \"bar3\",\n            \"time\": \"2022-01-21T23:41:01.613Z\",\n            \"id\": \"f7fbba6e0636f890e56fbbf3283e524c6fa3204ae298382d624741d0dc6638326e282c41be5e4254d8820772c5518a2c5a8c0c7f7eda19594a7eb539453e1ed7-99999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999998357191538386\"\n        }\n    ],\n    \"cursor\": \"AAAAAEN3RZDTrFGgM2hGKqLZ8TvMkOKhe7MPSesIxz7uvom8b-7JtuU6_ppoVzV7R3NmJLM6mQZk91gHa_bUEN1TJkWV39uWQvmcgZNSfDMpvwG7PYuBX59DyXva1Mu19IqZbUVphxnd2t3_RhTdzi8T7KkkxPcE806Kt1XouqyWK13nOt_XIrR6i_My5SZ9UpKLdKY_AracEnMGW10hjOPmAaUl_9ThJUwEBNL8Tb-pja4irMqvYEXs6gfZyZy-Pv7qqOv6ltQUR0MEM4iP-QJXCfLqjmQTyBsw_IUjxHpCQrIkQtBCc4aCBO7M0fgCa56sbOAe5qgL9IP_0Vp6Qr7GTjK22MUxiibK8Yjt14gayHYDd5W8cWf7kMI1xxgnTdTk_AZ94pmMoN8F7__Op_CkM8iRVFV-9ARfRhqjqn_qcCvXrmQC7HFOBTg5piHLCJrhvD0DBMqAXX6ZLgu17AbySRcuOzhuZZI867FhsBNTK52BlTYUbgjEwbiOLr1RX0nLqo_89vINo1WEu-jtbkZtqNNHxIFgBrbwZnJtNv3fz2vmrWKkvZ0XNnfRs7sSHL9iU2ZLIrESH2qq9Af-4vPYr4j5hqC7tvEj-jp-oUYxozP7052XCuARP3jDvmRGMcjtC7JPNdJygLD460ufi0QnD3_GbsW7M_rR2Im_40rfn-kapGxzzlvdmAaX-ZBEK_OlGsfECCn0rd7EK3nxPbYeIL8WuRpu0Jqqod5tdSOl2M5q47dng2qA-JVLN6nXAIVBMpfT5PUnhQD5mC0CyuRYLfA1TdWOoCn9exyldarvEmujpF_WEUl4ZGdoIPOfSxcYDkTAITfAcZjh9m94iFcNARVtMGtRFCOOBnphlV0xDlxg_K15YoATucag0t9hUtJN0HRC_PfggV8LL-eBK3OhO6X5eoxa9Tnyc-HIelH-Nbv1NXH2OrNX_5hBxbVot8J0vIt0NkKiGMB0_4GHauLRNbZpTq6V5GDrnSgOB4SUYHXYb1X9LtcQFw-LaD99mLNTF8NglfAwXBo\"\n}"
                         }
                     ]
                 },
                 {
                     "name": "Create a Comment",
                     "id": "8d0f101f-e0b0-4a08-aaaf-7dc610fc8739",
+                    "protocolProfileBehavior": {
+                        "disableBodyPruning": true
+                    },
                     "request": {
                         "method": "POST",
                         "header": [
@@ -109,7 +166,7 @@
                         ],
                         "body": {
                             "mode": "raw",
-                            "raw": "{\n    \"content\": \"<string>\",\n    \"email\": \"<email>\",\n    \"id\": \"<string>\",\n    \"name\": \"<string>\",\n    \"profile\": \"<string>\",\n    \"time\": \"<dateTime>\"\n}",
+                            "raw": "{\n    \"content\": \"bar7\",\n    \"email\": \"gheo@sweethuman.tech\",\n    \"name\": \"Gheo\"\n}",
                             "options": {
                                 "raw": {
                                     "language": "json"
@@ -127,9 +184,8 @@
                             ],
                             "variable": [
                                 {
-                                    "id": "ef601801-f2d3-44e1-b4bb-f762e8c4ece6",
                                     "key": "article",
-                                    "value": "<string>",
+                                    "value": "foo",
                                     "description": "(Required) The name of the article"
                                 }
                             ]
@@ -137,14 +193,19 @@
                     },
                     "response": [
                         {
-                            "id": "12a6a50d-88ff-4d93-a8fe-0140d2e13837",
+                            "id": "a02043b6-234a-4958-9dbc-6eafc1859911",
                             "name": "OK",
                             "originalRequest": {
                                 "method": "POST",
-                                "header": [],
+                                "header": [
+                                    {
+                                        "key": "Content-Type",
+                                        "value": "application/json"
+                                    }
+                                ],
                                 "body": {
                                     "mode": "raw",
-                                    "raw": "{\n    \"content\": \"<string>\",\n    \"email\": \"<email>\",\n    \"id\": \"<string>\",\n    \"name\": \"<string>\",\n    \"profile\": \"<string>\",\n    \"time\": \"<dateTime>\"\n}",
+                                    "raw": "{\n    \"content\": \"bar\",\n    \"email\": \"gheo@sweethuman.tech\",\n    \"name\": \"Gheo\"\n}",
                                     "options": {
                                         "raw": {
                                             "language": "json"
@@ -163,7 +224,7 @@
                                     "variable": [
                                         {
                                             "key": "article",
-                                            "value": "<string>",
+                                            "value": "foo",
                                             "description": "(Required) The name of the article"
                                         }
                                     ]
@@ -174,13 +235,57 @@
                             "_postman_previewlanguage": "json",
                             "header": [
                                 {
+                                    "key": "Date",
+                                    "value": "Fri, 21 Jan 2022 23:40:21 GMT"
+                                },
+                                {
                                     "key": "Content-Type",
-                                    "value": "application/json"
+                                    "value": "application/json;charset=UTF-8"
+                                },
+                                {
+                                    "key": "Transfer-Encoding",
+                                    "value": "chunked"
+                                },
+                                {
+                                    "key": "Connection",
+                                    "value": "keep-alive"
+                                },
+                                {
+                                    "key": "Expect-CT",
+                                    "value": "max-age=604800, report-uri=\"https://report-uri.cloudflare.com/cdn-cgi/beacon/expect-ct\""
+                                },
+                                {
+                                    "key": "Report-To",
+                                    "value": "{\"endpoints\":[{\"url\":\"https:\\/\\/a.nel.cloudflare.com\\/report\\/v3?s=TtJB5J%2BAFMrHkQFywuBX7AlaW42gDSJQzMynriFiDLLvO4YTPCNZDoOOI2xxIueMMyPMgt8PnhK7Fov1lTwT333okDBZI3JCNYcmNvgg5jvpnY3ezK19RuHnN3DF7jbBV3DWpntacHGSQniSpH9rkY8W5R1To5xaNQ%3D%3D\"}],\"group\":\"cf-nel\",\"max_age\":604800}"
+                                },
+                                {
+                                    "key": "NEL",
+                                    "value": "{\"success_fraction\":0,\"report_to\":\"cf-nel\",\"max_age\":604800}"
+                                },
+                                {
+                                    "key": "Vary",
+                                    "value": "Accept-Encoding"
+                                },
+                                {
+                                    "key": "Server",
+                                    "value": "cloudflare"
+                                },
+                                {
+                                    "key": "CF-RAY",
+                                    "value": "6d146316b8944321-FRA"
+                                },
+                                {
+                                    "key": "Content-Encoding",
+                                    "value": "br"
+                                },
+                                {
+                                    "key": "alt-svc",
+                                    "value": "h3=\":443\"; ma=86400, h3-29=\":443\"; ma=86400"
                                 }
                             ],
                             "cookie": [],
                             "responseTime": null,
-                            "body": "{\n \"id\": \"<string>\",\n \"name\": \"<string>\",\n \"content\": \"<string>\",\n \"profile\": \"<string>\",\n \"time\": \"<dateTime>\"\n}"
+                            "body": "{\n    \"content\": \"bar\",\n    \"email\": \"gheo@sweethuman.tech\",\n    \"name\": \"Gheo\",\n    \"profile\": \"https://www.gravatar.com/avatar/1f2a06b70de72a6f95de26d8501b555b\",\n    \"time\": 1642808420921\n}"
                         }
                     ]
                 }
