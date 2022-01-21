@@ -1,0 +1,199 @@
+{
+    "info": {
+        "_postman_id": "a04cfd27-8a36-44aa-95f0-4202bd63a3c0",
+        "name": "comments",
+        "description": "Contact Support:\n Name: Gheorghe Avram\n Email: gheo@qubuilder.com",
+        "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+    },
+    "item": [
+        {
+            "name": "comments/{article}",
+            "item": [
+                {
+                    "name": "Get Comments",
+                    "id": "724d7b4b-90e5-4beb-9ecf-930eb7b630ae",
+                    "request": {
+                        "method": "GET",
+                        "header": [],
+                        "url": {
+                            "raw": "{{baseUrl}}/comments/:article?limit=<number>&cursor=<string>",
+                            "host": [
+                                "{{baseUrl}}"
+                            ],
+                            "path": [
+                                "comments",
+                                ":article"
+                            ],
+                            "query": [
+                                {
+                                    "key": "limit",
+                                    "value": "<number>",
+                                    "description": "Amount of comments to send at once"
+                                },
+                                {
+                                    "key": "cursor",
+                                    "value": "<string>",
+                                    "description": "Cursor from previous requests, used to deliver next batch"
+                                }
+                            ],
+                            "variable": [
+                                {
+                                    "id": "0db1aef4-7abe-47a5-9471-12d6ee712c9d",
+                                    "key": "article",
+                                    "value": "<string>",
+                                    "description": "(Required) The name of the article"
+                                }
+                            ]
+                        }
+                    },
+                    "response": [
+                        {
+                            "id": "3ada3fc7-1058-462d-b4ec-c68713354be1",
+                            "name": "OK",
+                            "originalRequest": {
+                                "method": "GET",
+                                "header": [],
+                                "url": {
+                                    "raw": "{{baseUrl}}/comments/:article?limit=<number>&cursor=<string>",
+                                    "host": [
+                                        "{{baseUrl}}"
+                                    ],
+                                    "path": [
+                                        "comments",
+                                        ":article"
+                                    ],
+                                    "query": [
+                                        {
+                                            "key": "limit",
+                                            "value": "<number>"
+                                        },
+                                        {
+                                            "key": "cursor",
+                                            "value": "<string>"
+                                        }
+                                    ],
+                                    "variable": [
+                                        {
+                                            "key": "article",
+                                            "value": "<string>",
+                                            "description": "(Required) The name of the article"
+                                        }
+                                    ]
+                                }
+                            },
+                            "status": "OK",
+                            "code": 200,
+                            "_postman_previewlanguage": "json",
+                            "header": [
+                                {
+                                    "key": "Content-Type",
+                                    "value": "application/json"
+                                }
+                            ],
+                            "cookie": [],
+                            "responseTime": null,
+                            "body": "{\n \"comments\": [\n  {\n   \"id\": \"<string>\",\n   \"name\": \"<string>\",\n   \"content\": \"<string>\",\n   \"profile\": \"<string>\",\n   \"time\": \"<dateTime>\"\n  },\n  {\n   \"id\": \"<string>\",\n   \"name\": \"<string>\",\n   \"content\": \"<string>\",\n   \"profile\": \"<string>\",\n   \"time\": \"<dateTime>\"\n  }\n ],\n \"cursor\": \"<string,null>\"\n}"
+                        }
+                    ]
+                },
+                {
+                    "name": "Create a Comment",
+                    "id": "8d0f101f-e0b0-4a08-aaaf-7dc610fc8739",
+                    "request": {
+                        "method": "POST",
+                        "header": [
+                            {
+                                "key": "Content-Type",
+                                "value": "application/json"
+                            }
+                        ],
+                        "body": {
+                            "mode": "raw",
+                            "raw": "{\n    \"content\": \"<string>\",\n    \"email\": \"<email>\",\n    \"id\": \"<string>\",\n    \"name\": \"<string>\",\n    \"profile\": \"<string>\",\n    \"time\": \"<dateTime>\"\n}",
+                            "options": {
+                                "raw": {
+                                    "language": "json"
+                                }
+                            }
+                        },
+                        "url": {
+                            "raw": "{{baseUrl}}/comments/:article",
+                            "host": [
+                                "{{baseUrl}}"
+                            ],
+                            "path": [
+                                "comments",
+                                ":article"
+                            ],
+                            "variable": [
+                                {
+                                    "id": "ef601801-f2d3-44e1-b4bb-f762e8c4ece6",
+                                    "key": "article",
+                                    "value": "<string>",
+                                    "description": "(Required) The name of the article"
+                                }
+                            ]
+                        }
+                    },
+                    "response": [
+                        {
+                            "id": "12a6a50d-88ff-4d93-a8fe-0140d2e13837",
+                            "name": "OK",
+                            "originalRequest": {
+                                "method": "POST",
+                                "header": [],
+                                "body": {
+                                    "mode": "raw",
+                                    "raw": "{\n    \"content\": \"<string>\",\n    \"email\": \"<email>\",\n    \"id\": \"<string>\",\n    \"name\": \"<string>\",\n    \"profile\": \"<string>\",\n    \"time\": \"<dateTime>\"\n}",
+                                    "options": {
+                                        "raw": {
+                                            "language": "json"
+                                        }
+                                    }
+                                },
+                                "url": {
+                                    "raw": "{{baseUrl}}/comments/:article",
+                                    "host": [
+                                        "{{baseUrl}}"
+                                    ],
+                                    "path": [
+                                        "comments",
+                                        ":article"
+                                    ],
+                                    "variable": [
+                                        {
+                                            "key": "article",
+                                            "value": "<string>",
+                                            "description": "(Required) The name of the article"
+                                        }
+                                    ]
+                                }
+                            },
+                            "status": "OK",
+                            "code": 200,
+                            "_postman_previewlanguage": "json",
+                            "header": [
+                                {
+                                    "key": "Content-Type",
+                                    "value": "application/json"
+                                }
+                            ],
+                            "cookie": [],
+                            "responseTime": null,
+                            "body": "{\n \"id\": \"<string>\",\n \"name\": \"<string>\",\n \"content\": \"<string>\",\n \"profile\": \"<string>\",\n \"time\": \"<dateTime>\"\n}"
+                        }
+                    ]
+                }
+            ],
+            "id": "2d1a4793-d2ee-488c-bbd0-4e0e22775c40"
+        }
+    ],
+    "variable": [
+        {
+            "id": "ebdbd1e4-bbe9-49bd-bf79-96de85c04585",
+            "key": "baseUrl",
+            "value": "https://workers-comments.qubuilder.workers.dev",
+            "type": "string"
+        }
+    ]
+}

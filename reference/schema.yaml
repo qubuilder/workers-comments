@@ -1,0 +1,110 @@
+openapi: 3.1.0
+info:
+  title: comments
+  version: '1.0'
+  contact:
+    name: Gheorghe Avram
+    email: gheo@qubuilder.com
+  license:
+    name: MIT
+    identifier: MIT
+servers:
+  - url: 'https://workers-comments.qubuilder.workers.dev'
+    description: Production
+paths:
+  '/comments/{article}':
+    get:
+      summary: Get Comments
+      tags: []
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  comments:
+                    type: array
+                    items:
+                      $ref: '#/components/schemas/Comment'
+                  cursor:
+                    type:
+                      - string
+                      - 'null'
+                    description: Cursor for the next page if available
+      operationId: 'get-comments-:article'
+      parameters:
+        - schema:
+            type: number
+          in: query
+          name: limit
+          description: Amount of comments to send at once
+        - schema:
+            type: string
+          in: query
+          name: cursor
+          description: 'Cursor from previous requests, used to deliver next batch'
+    post:
+      summary: Create a Comment
+      operationId: 'post-comments-:article'
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Comment'
+      requestBody:
+        content:
+          application/json:
+            schema:
+              allOf:
+                - $ref: '#/components/schemas/Comment'
+                - type: object
+                  properties:
+                    email:
+                      type: string
+                      format: email
+                      description: Email of the author
+                  required:
+                    - email
+        description: ''
+    parameters:
+      - schema:
+          type: string
+        name: article
+        in: path
+        required: true
+        description: The name of the article
+components:
+  schemas:
+    Comment:
+      title: Comment
+      type: object
+      properties:
+        id:
+          type: string
+          description: Id of Comment
+          readOnly: true
+        name:
+          type: string
+          description: Name of the comment author
+        content:
+          type: string
+          description: Comment Content
+        profile:
+          type: string
+          description: URL for Profile Picture
+          readOnly: true
+        time:
+          type: string
+          format: date-time
+          description: Timestamp comment was created at
+          readOnly: true
+      required:
+        - id
+        - name
+        - content
+        - profile
+        - time
