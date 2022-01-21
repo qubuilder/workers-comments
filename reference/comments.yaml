@@ -2,186 +2,109 @@ openapi: 3.1.0
 info:
   title: comments
   version: '1.0'
+  contact:
+    name: Gheorghe Avram
+    email: gheo@qubuilder.com
+  license:
+    name: MIT
+    identifier: MIT
 servers:
-  - url: 'http://localhost:3000'
+  - url: 'https://workers-comments.qubuilder.workers.dev'
+    description: Production
 paths:
-  '/users/{userId}':
-    parameters:
-      - schema:
-          type: integer
-        name: userId
-        in: path
-        required: true
-        description: Id of an existing user.
+  '/comments/{article}':
     get:
-      summary: Get User Info by User ID
+      summary: Get Comments
       tags: []
       responses:
         '200':
-          description: User Found
+          description: OK
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/User'
-              examples:
-                Get User Alice Smith:
-                  value:
-                    id: 142
-                    firstName: Alice
-                    lastName: Smith
-                    email: alice.smith@gmail.com
-                    dateOfBirth: '1997-10-31'
-                    emailVerified: true
-                    signUpDate: '2019-08-24'
-        '404':
-          description: User Not Found
-      operationId: get-users-userId
-      description: Retrieve the information of the user with the matching user ID.
-    patch:
-      summary: Update User Information
-      operationId: patch-users-userId
-      responses:
-        '200':
-          description: User Updated
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/User'
-              examples:
-                Updated User Rebecca Baker:
-                  value:
-                    id: 13
-                    firstName: Rebecca
-                    lastName: Baker
-                    email: rebecca@gmail.com
-                    dateOfBirth: '1985-10-02'
-                    emailVerified: false
-                    createDate: '2019-08-24'
-        '404':
-          description: User Not Found
-        '409':
-          description: Email Already Taken
-      description: Update the information of an existing user.
-      requestBody:
-        content:
-          application/json:
-            schema:
-              type: object
-              properties:
-                firstName:
-                  type: string
-                lastName:
-                  type: string
-                email:
-                  type: string
-                  description: 'If a new email is given, the user''s email verified property will be set to false.'
-                dateOfBirth:
-                  type: string
-            examples:
-              Update First Name:
-                value:
-                  firstName: Rebecca
-              Update Email:
-                value:
-                  email: rebecca@gmail.com
-              Update Last Name & Date of Birth:
-                value:
-                  lastName: Baker
-                  dateOfBirth: '1985-10-02'
-        description: Patch user properties to update.
-  /user:
+                type: object
+                properties:
+                  comments:
+                    type: array
+                    items:
+                      $ref: '#/components/schemas/Comment'
+                  cursor:
+                    type:
+                      - string
+                      - 'null'
+                    description: Cursor for the next page if available
+      operationId: 'get-comments-:article'
+      parameters:
+        - schema:
+            type: number
+          in: query
+          name: limit
+          description: Amount of comments to send at once
+        - schema:
+            type: string
+          in: query
+          name: cursor
+          description: 'Cursor from previous requests, used to deliver next batch'
     post:
-      summary: Create New User
-      operationId: post-user
+      summary: Create a Comment
+      operationId: 'post-comments-:article'
       responses:
         '200':
-          description: User Created
+          description: OK
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/User'
-              examples:
-                New User Bob Fellow:
-                  value:
-                    id: 12
-                    firstName: Bob
-                    lastName: Fellow
-                    email: bob.fellow@gmail.com
-                    dateOfBirth: '1996-08-24'
-                    emailVerified: false
-                    createDate: '2020-11-18'
-        '400':
-          description: Missing Required Information
-        '409':
-          description: Email Already Taken
+                $ref: '#/components/schemas/Comment'
       requestBody:
         content:
           application/json:
             schema:
-              type: object
-              properties:
-                firstName:
-                  type: string
-                lastName:
-                  type: string
-                email:
-                  type: string
-                dateOfBirth:
-                  type: string
-                  format: date
-              required:
-                - firstName
-                - lastName
-                - email
-                - dateOfBirth
-            examples:
-              Create User Bob Fellow:
-                value:
-                  firstName: Bob
-                  lastName: Fellow
-                  email: bob.fellow@gmail.com
-                  dateOfBirth: '1996-08-24'
-        description: Post the necessary fields for the API to create a new user.
-      description: Create a new user.
+              allOf:
+                - $ref: '#/components/schemas/Comment'
+                - type: object
+                  properties:
+                    email:
+                      type: string
+                      format: email
+                      description: Email of the author
+                  required:
+                    - email
+        description: ''
+    parameters:
+      - schema:
+          type: string
+        name: article
+        in: path
+        required: true
+        description: The name of the article
 components:
   schemas:
-    User:
-      title: User
+    Comment:
+      title: Comment
       type: object
-      description: ''
-      examples:
-        - id: 142
-          firstName: Alice
-          lastName: Smith
-          email: alice.smith@gmail.com
-          dateOfBirth: '1997-10-31'
-          emailVerified: true
-          signUpDate: '2019-08-24'
       properties:
         id:
-          type: integer
-          description: Unique identifier for the given user.
-        firstName:
           type: string
-        lastName:
+          description: Id of Comment
+          readOnly: true
+        name:
           type: string
-        email:
+          description: Name of the comment author
+        content:
           type: string
-          format: email
-        dateOfBirth:
+          description: Comment Content
+        profile:
           type: string
-          format: date
-          example: '1997-10-31'
-        emailVerified:
-          type: boolean
-          description: Set to true if the user's email has been verified.
-        createDate:
+          description: URL for Profile Picture
+          readOnly: true
+        time:
           type: string
-          format: date
-          description: The date that the user was created.
+          format: date-time
+          description: Timestamp comment was created at
+          readOnly: true
       required:
         - id
-        - firstName
-        - lastName
-        - email
-        - emailVerified
+        - name
+        - content
+        - profile
+        - time
