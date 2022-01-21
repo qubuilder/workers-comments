@@ -26,7 +26,7 @@ router.get('/comments/:article', async ({ request, params, response }) => {
     const jsonComment = (await COMMENTS_KV.get(key.name)) as string;
     const storedComment = JSON.parse(jsonComment) as StoredComment;
     const comment = pickKeys(storedComment, ['name', 'profile', 'content', 'time']);
-    content.comments.push({ ...comment, id: key.name });
+    content.comments.push({ ...comment, time: new Date(comment.time).toISOString(), id: key.name });
     if (values.cursor != null) {
       content.cursor = values.cursor;
     }

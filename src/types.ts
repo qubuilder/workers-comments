@@ -7,7 +7,7 @@ export type Comment = {
 export type ResponseComment = {
   id: string;
   profile: string;
-  time: number;
+  time: string;
 } & Omit<Comment, 'email'>;
 
 export type StoredComment = {
