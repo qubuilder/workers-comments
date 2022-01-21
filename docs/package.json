@@ -1,9 +1,9 @@
 {
-  "name": "gatsby-starter-rocketdocs",
+  "name": "workers-comments",
   "private": true,
   "version": "1.0.0",
-  "description": "Out of the box Gatsby Starter for creating documentation websites easily and quickly. With support for MDX, code highlight, Analytics, SEO and more",
-  "author": "João Pedro Schmitz <hey@joaopedro.dev> (@jpedroschmitz)",
+  "description": "Simple Comments API you can host yourself on cloudflare workers.",
+  "author": "Gheorghe Avram <gheo@qubuilder.com>",
   "license": "MIT",
   "starter-name": "gatsby-starter-rocketdocs",
   "dependencies": {
@@ -12,6 +12,7 @@
     "gatsby-plugin-canonical-urls": "^4.2.0",
     "gatsby-plugin-google-analytics": "^4.2.0",
     "gatsby-plugin-manifest": "^4.2.0",
+    "gatsby-plugin-netlify": "^4.0.0",
     "gatsby-plugin-offline": "^5.2.0",
     "gatsby-plugin-remove-trailing-slashes": "^4.2.0",
     "gatsby-plugin-sitemap": "^5.2.0",
@@ -19,7 +20,6 @@
     "react": "^17.0.2",
     "react-dom": "^17.0.2"
   },
-  "devDependencies": {},
   "keywords": [
     "gatsby",
     "gatsby-starter"

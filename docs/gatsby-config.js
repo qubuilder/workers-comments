@@ -1,11 +1,11 @@
 module.exports = {
   siteMetadata: {
-    siteTitle: `Rocket Docs`,
-    defaultTitle: `Rocket Docs`,
-    siteTitleShort: `Rocket Docs`,
-    siteDescription: `Out of the box Gatsby Theme for creating documentation websites easily and quickly`,
-    siteUrl: `https://rocketdocs.netlify.app`,
-    siteAuthor: `@jpedroschmitz`,
+    siteTitle: `Workers Comments Docs`,
+    defaultTitle: `Workers Comments Docs`,
+    siteTitleShort: `Workers Comments Docs`,
+    siteDescription: `Simple Comments API you can host yourself on cloudflare workers.`,
+    siteUrl: `https://comments.qubs.space`,
+    siteAuthor: `@qubuilder`,
     siteImage: `/banner.png`,
     siteLanguage: `en`,
     themeColor: `#8257E6`,
@@ -18,15 +18,15 @@ module.exports = {
       options: {
         configPath: `src/config`,
         docsPath: `src/docs`,
-        repositoryUrl: `https://github.com/jpedroschmitz/rocketdocs`,
-        baseDir: `examples/gatsby-theme-docs`,
+        repositoryUrl: `https://github.com/qubuilder/workers-comments`,
+        baseDir: `docs`,
       },
     },
     {
       resolve: `gatsby-plugin-manifest`,
       options: {
-        name: `Rocket Docs`,
-        short_name: `Rocket Docs`,
+        name: `Workers Comments Docs`,
+        short_name: `Workers Comments Docs`,
         start_url: `/`,
         background_color: `#ffffff`,
         display: `standalone`,
@@ -44,9 +44,10 @@ module.exports = {
     {
       resolve: `gatsby-plugin-canonical-urls`,
       options: {
-        siteUrl: `https://rocketdocs.netlify.app`,
+        siteUrl: `https://comments.qubs.space`,
       },
     },
     `gatsby-plugin-offline`,
+    `gatsby-plugin-netlify`
   ],
 };
