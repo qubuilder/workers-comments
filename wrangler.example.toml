@@ -1,0 +1,14 @@
+name = "workers-comments"
+type = "javascript"
+zone_id = ""
+account_id = ""
+route = ""
+workers_dev = true
+[[kv_namespaces]]
+binding = "COMMENTS_KV"
+preview_id = ""
+id = ""
+[build]
+command = "npm install && npm run build"
+[build.upload]
+format = "service-worker"
