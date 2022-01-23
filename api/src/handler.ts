@@ -5,6 +5,7 @@ import { Comment, GetResponse, StoredComment } from './types';
 import { config } from './config';
 import { commentValidator } from './validators';
 import { BadRequest } from 'http-errors';
+import { corsHeaders } from './middleware';
 
 const app = new Sunder();
 const router = new Router();
@@ -73,7 +74,7 @@ router.post('/comments/:article', async ({ request, response, params }) => {
     time,
   };
 });
-
+app.use(corsHeaders);
 app.use(renderErrorsAsJSON);
 app.use(router.middleware);
 export default app;
