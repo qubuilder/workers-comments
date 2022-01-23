@@ -8,6 +8,7 @@ info:
   license:
     name: MIT
     identifier: MIT
+  description: Small Comments API built on top of Cloudflare Workers.
 servers:
   - url: 'https://workers-comments.qubuilder.workers.dev'
     description: Production
@@ -15,6 +16,7 @@ paths:
   '/comments/{article}':
     get:
       summary: Get Comments
+      operationId: get-comment
       tags: []
       responses:
         '200':
@@ -29,11 +31,10 @@ paths:
                     items:
                       $ref: '#/components/schemas/Comment'
                   cursor:
-                    type:
-                      - string
-                      - 'null'
+                    type: string
                     description: Cursor for the next page if available
-      operationId: 'get-comments-:article'
+        '500':
+          $ref: '#/components/responses/Error'
       parameters:
         - schema:
             type: number
@@ -45,9 +46,10 @@ paths:
           in: query
           name: cursor
           description: 'Cursor from previous requests, used to deliver next batch'
+      description: Gets all the comments of an article.
     post:
       summary: Create a Comment
-      operationId: 'post-comments-:article'
+      operationId: create-comment
       responses:
         '200':
           description: OK
@@ -55,6 +57,10 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/Comment'
+        '400':
+          $ref: '#/components/responses/Error'
+        '500':
+          $ref: '#/components/responses/Error'
       requestBody:
         content:
           application/json:
@@ -70,6 +76,7 @@ paths:
                   required:
                     - email
         description: ''
+      description: Creates a comments for an article.
     parameters:
       - schema:
           type: string
@@ -108,3 +115,14 @@ components:
         - content
         - profile
         - time
+  responses:
+    Error:
+      description: Example response
+      content:
+        application/json:
+          schema:
+            type: object
+            properties:
+              message:
+                type: string
+      headers: {}
