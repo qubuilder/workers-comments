@@ -82,7 +82,8 @@ const fieldStyle = css`
   border-radius: 0.375rem;
 
   &:focus {
-    border-color: rgb(99 102 241);
+    border-color: #8257e6;
+    outline-color: #8257e6;
   }
 `;
 
