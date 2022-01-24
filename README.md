@@ -19,6 +19,8 @@ Docs at: https://comments.qubs.space/
 - [x] UniqueIDs for prefix (ex: so that article "hello" won't retrieve data from "hello world"
 - [x] Ordering
 - [ ] Published React Component
+- [ ] Captcha
+- [ ] Filtering & Spam Protection
 - [ ] Testing
 - [ ] Likes?
 - [ ] Replies?
