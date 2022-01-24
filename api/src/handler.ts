@@ -74,6 +74,11 @@ router.post('/comments/:article', async ({ request, response, params }) => {
     time,
   };
 });
+
+router.options('*', ({ request, response }) => {
+  response.set('Access-Control-Allow-Headers', request.headers.get('Access-Control-Request-Headers')!);
+});
+
 app.use(corsHeaders);
 app.use(renderErrorsAsJSON);
 app.use(router.middleware);
