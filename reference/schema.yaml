@@ -33,9 +33,6 @@ paths:
                   cursor:
                     type: string
                     nullable: true
-                required:
-                  - comments
-                  - cursor
         '500':
           $ref: '#/components/responses/Error'
       operationId: get-comments-article
@@ -54,7 +51,8 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/Comment'
+                type: object
+                properties: {}
         '400':
           $ref: '#/components/responses/Error'
         '500':
@@ -98,7 +96,6 @@ components:
         profile:
           type: string
           description: URL for Profile Picture
-          format: uri
           readOnly: true
         time:
           type: string
@@ -106,8 +103,11 @@ components:
           description: Timestamp comment was created at
           readOnly: true
       required:
+        - id
         - name
         - content
+        - profile
+        - time
   responses:
     Error:
       description: Error Response
