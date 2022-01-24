@@ -14,6 +14,7 @@ Docs at: https://comments.qubs.space/
 - [ ] Configuration
 - [ ] Cache API
 - [x] OpenAPI File for Easy Integration
+- [x] Postman Collection
 - [x] Gravatar Profile Pic
 - [x] Pagination
 - [x] UniqueIDs for prefix (ex: so that article "hello" won't retrieve data from "hello world"
