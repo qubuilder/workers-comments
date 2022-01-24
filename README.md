@@ -13,11 +13,12 @@ Docs at: https://comments.qubs.space/
 - [ ] Moderation
 - [ ] Configuration
 - [ ] Cache API
-- [ ] OpenAPI File for Easy Integration
+- [x] OpenAPI File for Easy Integration
 - [x] Gravatar Profile Pic
 - [x] Pagination
 - [x] UniqueIDs for prefix (ex: so that article "hello" won't retrieve data from "hello world"
 - [x] Ordering
+- [ ] Published React Component
 - [ ] Testing
 - [ ] Likes?
 - [ ] Replies?
