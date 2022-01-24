@@ -1,5 +1,5 @@
 {
-  "name": "workers-comments",
+  "name": "workers-comments-docs",
   "private": true,
   "version": "1.0.0",
   "description": "Simple Comments API you can host yourself on cloudflare workers.",
@@ -7,7 +7,11 @@
   "license": "MIT",
   "starter-name": "gatsby-starter-rocketdocs",
   "dependencies": {
+    "@emotion/react": "^11.7.1",
+    "@emotion/styled": "^11.6.0",
     "@rocketseat/gatsby-theme-docs": "^3.0.0",
+    "axios": "^0.25.0",
+    "eslint-webpack-plugin": "^3.1.1",
     "gatsby": "^4.2.0",
     "gatsby-plugin-canonical-urls": "^4.2.0",
     "gatsby-plugin-google-analytics": "^4.2.0",
@@ -16,9 +20,12 @@
     "gatsby-plugin-offline": "^5.2.0",
     "gatsby-plugin-remove-trailing-slashes": "^4.2.0",
     "gatsby-plugin-sitemap": "^5.2.0",
+    "immer": "^9.0.12",
     "prop-types": "^15.7.2",
     "react": "^17.0.2",
-    "react-dom": "^17.0.2"
+    "react-dom": "^17.0.2",
+    "react-hook-form": "^7.25.0",
+    "use-immer": "^0.6.0"
   },
   "keywords": [
     "gatsby",
@@ -28,13 +35,26 @@
     "build": "gatsby build",
     "start": "gatsby develop",
     "serve": "gatsby serve",
-    "clean": "gatsby clean"
+    "clean": "gatsby clean",
+    "types:openapi": "openapi -i ../reference/schema.yaml -o src/services/comments -c axios --exportSchemas true",
+    "type-check": "./node_modules/typescript/bin/tsc --noEmit --skipLibCheck"
   },
   "volta": {
     "node": "16.13.2",
     "npm": "8.3.2"
   },
   "devDependencies": {
-    "@netlify/plugin-gatsby": "^1.0.3"
+    "@netlify/plugin-gatsby": "^1.0.3",
+    "@typescript-eslint/eslint-plugin": "^5.10.0",
+    "@typescript-eslint/parser": "^5.10.0",
+    "eslint": "^7.32.0",
+    "eslint-config-prettier": "^8.3.0",
+    "eslint-loader": "^4.0.2",
+    "eslint-plugin-prettier": "^4.0.0",
+    "eslint-plugin-react": "^7.28.0",
+    "gatsby-plugin-eslint": "^4.0.2",
+    "openapi-typescript": "^5.1.0",
+    "openapi-typescript-codegen": "^0.13.0",
+    "typescript": "^4.5.5"
   }
 }
