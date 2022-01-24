@@ -69,6 +69,7 @@ router.post('/comments/:article', async ({ request, response, params }) => {
   };
   await COMMENTS_KV.put(key, JSON.stringify(comment));
   response.body = {
+    id: key,
     ...body,
     profile,
     time,
