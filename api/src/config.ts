@@ -5,4 +5,5 @@ export const config = {
     methods: '*',
     maxAge: '86400',
   },
+  cacheSeconds: 300,
 };

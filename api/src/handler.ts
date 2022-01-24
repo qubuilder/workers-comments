@@ -35,7 +35,7 @@ router.get('/comments/:article', async ({ request, params, response }) => {
 
   response.status = 200;
   response.body = content;
-  response.headers.set('Cache-Control', 'public, max-age=300');
+  response.headers.set('Cache-Control', `public, max-age=${config.cacheSeconds}`);
 });
 
 router.post('/comments/:article', async ({ request, response, params }) => {
